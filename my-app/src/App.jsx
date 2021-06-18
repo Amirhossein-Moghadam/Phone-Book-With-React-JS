@@ -1,17 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import fetchApi from './fetch';
+import React from "react";
+import Manager from "./components/Manager";
 
-fetchApi("https://jsonplaceholder.typicode.com/post")
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-   
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  return <Manager />;
+};
 
 export default App;
