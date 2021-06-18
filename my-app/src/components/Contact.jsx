@@ -2,7 +2,7 @@ import React from "react";
 import ContactItem from "./ContactItem";
 import { Table } from "react-bootstrap";
 
-const Contact = ({ contacts, getEditModeValue, getRemoveItemKey }) => {
+const Contact = ({ contacts, getEditModeValue,getEditItemKey, getRemoveItemKey }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -19,8 +19,8 @@ const Contact = ({ contacts, getEditModeValue, getRemoveItemKey }) => {
             id={key}
             name={item.name}
             phone={item.phone}
-            getEditModeClick={() => getEditModeValue(true)}
-            onClick={() => getRemoveItemKey(key)}
+            getEditModeClick={() => getEditModeValue(true , key)}
+            getRemoveItemClick={() => getRemoveItemKey(key)}
           />
         );
       })}

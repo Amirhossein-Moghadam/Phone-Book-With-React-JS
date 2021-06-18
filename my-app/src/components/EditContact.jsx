@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-const EditContact = ({ getCancellEditMode }) => {
+const EditContact = ({
+  getCancellEditMode,
+  nameValue,
+  phoneValue,
+  getNewNameAndPhone,
+}) => {
+  const [name, setName] = useState(nameValue);
+  const [phone, setPhone] = useState(phoneValue);
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+  const handlePhone = (e) => {
+    setPhone(e.target.value);
+  };
+
   return (
     <Form>
       <Form.Group className=" mx-2">
@@ -14,10 +29,24 @@ const EditContact = ({ getCancellEditMode }) => {
         <Form.Label>
           <b>Name</b>
         </Form.Label>
-        <Form.Control type="text" className="mb-3" />
+        <Form.Control
+          type="text"
+          className="mb-3"
+          value={name}
+          onChange={handleName}
+        />
         <b>Phone</b>
-        <Form.Control type="text" className="mb-3" />
-        <Button variant="outline-success" className="mr-2">
+        <Form.Control
+          type="text"
+          className="mb-3"
+          value={phone}
+          onChange={handlePhone}
+        />
+        <Button
+          variant="outline-success"
+          className="mr-2"
+          onClick={() => getNewNameAndPhone(name, phone)}
+        >
           Edit
         </Button>
         <Button

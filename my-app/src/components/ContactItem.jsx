@@ -6,7 +6,7 @@ const ContactItem = ({
   name,
   phone,
   getEditModeClick,
-  onClick,
+  getRemoveItemClick
 }) => {
   return (
     <tbody>
@@ -25,7 +25,7 @@ const ContactItem = ({
           <Button
             variant="outline-dark"
             className="btn-sm"
-            onClick={onClick}
+            onClick={getRemoveItemClick}
           >
             Remove
           </Button>

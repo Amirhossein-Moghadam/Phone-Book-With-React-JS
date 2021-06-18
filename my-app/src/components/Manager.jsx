@@ -11,6 +11,7 @@ const Manager = () => {
   const [editMode, setEditMode] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [data, setData] = useState(null);
+  const [keyOfContact, setKeyOfContact] = useState("");
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -45,7 +46,8 @@ const Manager = () => {
     setAddmode(value);
   };
 
-  const handleEditMode = (value) => {
+  const handleEditMode = (value, key) => {
+    setKeyOfContact(key);
     setBaseMode(!value);
     setAddmode(!value);
     setEditMode(value);
@@ -60,6 +62,14 @@ const Manager = () => {
   const handleRemoveItem = (key) => {
     contacts.splice(key, 1);
     setContacts([...contacts]);
+  };
+
+  const handleNewNameAndPhone = (name, phone) => {
+    contacts.splice(keyOfContact, 1, { name, phone });
+    setContacts([...contacts]);
+    setBaseMode(true);
+    setAddmode(false);
+    setEditMode(false);
   };
 
   return (
@@ -106,7 +116,14 @@ const Manager = () => {
           cancellClick={handleCancellClick}
         />
       )}
-      {editMode && <EditContact getCancellEditMode={handleCancellEditMode} />}
+      {editMode && (
+        <EditContact
+          getCancellEditMode={handleCancellEditMode}
+          nameValue={data[keyOfContact].name}
+          phoneValue={data[keyOfContact].phone}
+          getNewNameAndPhone={handleNewNameAndPhone}
+        />
+      )}
     </Container>
   );
 };
