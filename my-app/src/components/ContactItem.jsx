@@ -1,7 +1,13 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-const ContactItem = ({ id, name, phone }) => {
+const ContactItem = ({
+  id,
+  name,
+  phone,
+  getEditModeClick,
+  onClick,
+}) => {
   return (
     <tbody>
       <tr>
@@ -9,10 +15,18 @@ const ContactItem = ({ id, name, phone }) => {
         <td>{name}</td>
         <td>{phone}</td>
         <td className="d-flex justify-content-end">
-          <Button variant="outline-dark" className="mr-3 btn-sm">
+          <Button
+            variant="outline-dark"
+            className="mr-3 btn-sm"
+            onClick={getEditModeClick}
+          >
             Edit
           </Button>
-          <Button variant="outline-dark" className="btn-sm">
+          <Button
+            variant="outline-dark"
+            className="btn-sm"
+            onClick={onClick}
+          >
             Remove
           </Button>
         </td>

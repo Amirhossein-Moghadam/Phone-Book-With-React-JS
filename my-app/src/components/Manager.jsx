@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Contact from "./Contact";
+import AddContact from "./AddContact";
+import EditContact from "./EditContact";
 
 const Manager = () => {
-  const [baseFormShow, setBaseFormShow] = useState(true);
-  const [addFormShow, setAddFormShow] = useState(false);
+  const [baseMode, setBaseMode] = useState(true);
+  const [addMode, setAddmode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [data, setData] = useState(null);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -28,33 +29,45 @@ const Manager = () => {
     );
   };
 
-  const handleAddClick = () => {
-    setBaseFormShow(false);
-    setAddFormShow(true);
-  };
-
-  const handleCancellClick = () => {
-    setBaseFormShow(true);
-    setAddFormShow(false);
-  };
-
-  const nameOnChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const phoneOnChange = (e) => {
-    setPhone(e.target.value);
-  };
-
-  const addContactClick = () => {
+  const handleNameAndPhone = (name, phone, value) => {
     setContacts([...contacts, { name, phone }]);
-    setBaseFormShow(true);
-    setAddFormShow(false);
+    setBaseMode(value);
+    setAddmode(!value);
+  };
+
+  const handleAddClick = () => {
+    setBaseMode(false);
+    setAddmode(true);
+  };
+
+  const handleCancellClick = (value) => {
+    setBaseMode(!value);
+    setAddmode(value);
+  };
+
+  const handleEditMode = (value) => {
+    setBaseMode(!value);
+    setAddmode(!value);
+    setEditMode(value);
+  };
+
+  const handleCancellEditMode = (value) => {
+    setBaseMode(!value);
+    setAddmode(value);
+    setEditMode(value);
+  };
+
+  const handleRemoveItem = (key) => {
+    contacts.splice(key, 1);
+    setContacts([...contacts]);
   };
 
   return (
-    <Container className="bg-light py-2 mt-5 pl-2">
-      {baseFormShow && (
+    <Container
+      className="bg-light py-2 mt-5 pl-2"
+      style={{ borderRadius: "12px" }}
+    >
+      {baseMode && (
         <>
           <Form>
             <Form.Group className=" mx-2">
@@ -77,46 +90,23 @@ const Manager = () => {
             </Form.Group>
           </Form>
 
-          {contacts.length > 0 && <Contact contacts={data} />}
+          {contacts.length > 0 && (
+            <Contact
+              contacts={data}
+              getEditModeValue={handleEditMode}
+              getRemoveItemKey={handleRemoveItem}
+            />
+          )}
         </>
       )}
 
-      {addFormShow && (
-        <Form>
-          <Form.Group className=" mx-2">
-            <Form.Label className="my-3">
-              <h4>
-                <b>My Phone Book</b>
-              </h4>
-            </Form.Label>
-            <br />
-            <Form.Label>
-              <b>Name</b>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              className="mb-3"
-              onChange={nameOnChange}
-            />
-            <b>Phone</b>
-            <Form.Control
-              type="text"
-              className="mb-3"
-              onChange={phoneOnChange}
-            />
-            <Button
-              variant="success"
-              className="mr-2"
-              onClick={addContactClick}
-            >
-              Add
-            </Button>
-            <Button variant="danger" onClick={handleCancellClick}>
-              Cancell
-            </Button>
-          </Form.Group>
-        </Form>
+      {addMode && (
+        <AddContact
+          getNameAndPhone={handleNameAndPhone}
+          cancellClick={handleCancellClick}
+        />
       )}
+      {editMode && <EditContact getCancellEditMode={handleCancellEditMode} />}
     </Container>
   );
 };
