@@ -35,14 +35,14 @@ const AddContact = ({ getNameAndPhone, cancellClick }) => {
           <Form.Label>
             <b>Name</b>
           </Form.Label>
-          <Form.Control type="text" className="mb-3" onChange={nameOnChange} />
+          <Form.Control type="text" className="mb-3" onChange={nameOnChange} id="name" />
           <b>Phone</b>
-          <Form.Control type="text" className="mb-3" onChange={phoneOnChange} />
-          <Button variant="success" className="mr-2" onClick={addContactClick}>
+          <Form.Control type="text" className="mb-3" onChange={phoneOnChange} id="phone" />
+          <Button variant="success" className="mr-2" onClick={addContactClick} id='add'>
             Add
           </Button>
-          <Button variant="danger" onClick={handleCancellClick}>
-            Cancell
+          <Button variant="danger" onClick={handleCancellClick} id="cancel">
+            Cancel
           </Button>
         </Form.Group>
       </Form>

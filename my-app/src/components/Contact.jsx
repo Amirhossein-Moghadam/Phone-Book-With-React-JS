@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 
 const Contact = ({ contacts, getEditModeValue,getEditItemKey, getRemoveItemKey }) => {
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover id="table">
       <thead>
         <tr>
           <th>#</th>

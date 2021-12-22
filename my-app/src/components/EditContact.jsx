@@ -34,6 +34,7 @@ const EditContact = ({
           className="mb-3"
           value={name}
           onChange={handleName}
+          id="name"
         />
         <b>Phone</b>
         <Form.Control
@@ -41,17 +42,20 @@ const EditContact = ({
           className="mb-3"
           value={phone}
           onChange={handlePhone}
+          id="phone"
         />
         <Button
           variant="outline-success"
           className="mr-2"
           onClick={() => getNewNameAndPhone(name, phone)}
+          id='edit'
         >
           Edit
         </Button>
         <Button
           variant="outline-danger"
           onClick={() => getCancellEditMode(false)}
+          id="cancel"
         >
           Cancell
         </Button>

@@ -92,8 +92,9 @@ const Manager = () => {
                   placeholder="Enter a keyword to search"
                   className="col-md-11 mr-3"
                   onChange={handleKeyword}
+                  id='search'
                 />
-                <Button variant="primary" onClick={handleAddClick}>
+                <Button variant="primary" onClick={handleAddClick} id='add'>
                   Add
                 </Button>
               </div>

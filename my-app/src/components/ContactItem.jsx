@@ -11,14 +11,15 @@ const ContactItem = ({
   return (
     <tbody>
       <tr>
-        <td>{id + 1}</td>
-        <td>{name}</td>
-        <td>{phone}</td>
+        <td id="idItem">{id + 1}</td>
+        <td id="nameItem">{name}</td>
+        <td id="phoneItem">{phone}</td>
         <td className="d-flex justify-content-end">
           <Button
             variant="outline-dark"
             className="mr-3 btn-sm"
             onClick={getEditModeClick}
+            id="edit"
           >
             Edit
           </Button>
@@ -26,6 +27,7 @@ const ContactItem = ({
             variant="outline-dark"
             className="btn-sm"
             onClick={getRemoveItemClick}
+            id="remove"
           >
             Remove
           </Button>
